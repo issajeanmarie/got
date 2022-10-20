@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { StyledComponentsTypes } from "../../../libs/types";
+import { StyledComponentsTypes } from "../../../../libs/types";
 import { colors } from "../../../../themes/colors";
 
-export const Title = styled.h2`
+export default styled.h2`
 	font-size: 24px;
 	font-weight: 300;
 	margin: auto;

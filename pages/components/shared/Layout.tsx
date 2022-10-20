@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { LayoutTypes } from "../../libs/types";
+import { LayoutTypes } from "../../../libs/types";
 
 const LayoutContainer = styled.div`
 	color: white;
