@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { colors } from "../../../../themes/colors";
-import { StyledComponentsTypes } from "../../../libs/types";
+import { StyledComponentsTypes } from "../../../../libs/types";
 
-export const Text = styled.p`
+export default styled.p`
 	font-size: 16px;
 	font-weight: ${(props: StyledComponentsTypes) => props.weight || ""};
 	color: ${(props) => props.color || ""};

@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import Image from "next/image";
-import { Flex } from "../shared/Flex";
-import { PrimaryButton } from "../shared/Buttons/PrimaryButton";
-import { Caption } from "../shared/Text/Caption";
+import Flex from "../shared/Flex";
+import PrimaryButton from "../shared/Buttons/PrimaryButton";
+import Caption from "../shared/Text/Caption";
 import styled from "styled-components";
-import { StyledComponentsTypes } from "../../libs/types";
+import { StyledComponentsTypes } from "../../../libs/types";
 
 const MenuRightSide = styled(Flex)`
 	@media (max-width: 768px) {

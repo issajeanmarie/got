@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { Flex } from "./Flex";
+import Flex from "./Flex";
 import { colors } from "../../../themes/colors";
 
-export const NumberIndicator = styled(Flex)`
+export default styled(Flex)`
 	width: 24px;
 	height: 24px;
 	border-radius: 50%;
