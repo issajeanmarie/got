@@ -2,14 +2,14 @@ import React, { FC } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import { colors } from "../../../themes/colors";
-import { Flex } from "../shared/Flex";
-import { SubTitle } from "../shared/Text/SubTitle";
-import { Caption } from "../shared/Text/Caption";
-import { Text } from "../shared/Text/Text";
-import { Section } from "../shared/Section";
-import { NumberIndicator } from "../shared/NumberIndicator";
-import { SecondaryButton } from "../shared/Buttons/SecondaryButton";
-import { CardTypes } from "../../libs/types";
+import Flex from "../shared/Flex";
+import SubTitle from "../shared/Text/SubTitle";
+import Caption from "../shared/Text/Caption";
+import Text from "../shared/Text/Text";
+import Section from "../shared/Section";
+import NumberIndicator from "../shared/NumberIndicator";
+import SecondaryButton from "../shared/Buttons/SecondaryButton";
+import { CardTypes } from "../../../libs/types";
 
 const CardStyles = styled.div`
 	background: ${colors.card};
@@ -21,55 +21,69 @@ const CardStyles = styled.div`
 	flex-basis: 30%;
 `;
 
-const Card: FC<CardTypes> = ({ setIsVisible }) => {
+const Card: FC<CardTypes> = ({
+	setIsVisible,
+	name,
+	coatOfArms,
+	region,
+	words,
+	swornMembers,
+	url,
+	setHouseToDisplay,
+}) => {
 	return (
 		<CardStyles>
 			<Flex justify="none" gap={24} mb={32}>
 				<Image src="/icons/house.png" width={26} height={29} alt="House icon" />
 
 				<SubTitle transform="uppercase" weight={600}>
-					This is house of Tamarindsc
+					{name || "Unknown"}
 				</SubTitle>
 			</Flex>
 
 			<Section mb={32}>
 				<Flex justify="none" gap={24} mb={12}>
-					<Text weight={300} color="#C4C4C4" width="20%">
-						Region
+					<Text weight={300} color="#C4C4C4" width="22%">
+						Region:
 					</Text>
 
-					<Text>The Vale</Text>
+					<Text>{region || "Unknown"}</Text>
 				</Flex>
 
 				<Flex justify="none" gap={24} mb={12}>
-					<Text weight={300} color="#C4C4C4" width="20%">
-						Lord
+					<Text weight={300} color="#C4C4C4" width="22%">
+						Words:
 					</Text>
 
-					<Text>Issa Jean Marie</Text>
+					<Text>{words || "Unknown"}</Text>
 				</Flex>
 
 				<Flex justify="none" gap={24} mb={12}>
-					<Text weight={300} color="#C4C4C4" width="20%">
-						Over lord
+					<Text weight={300} color="#C4C4C4" width="22%">
+						CoatOfArms:
 					</Text>
 
-					<Text>The Vale</Text>
+					<Text>{coatOfArms || "Unknown"}</Text>
 				</Flex>
 			</Section>
 
 			<Flex>
 				<Flex justify="none" width="100%" gap={12}>
 					<NumberIndicator items="center" justify="center">
-						30
+						{swornMembers}
 					</NumberIndicator>
 
 					<Text weight={300} color="#C4C4C4" width="20%" nowrap="true">
-						Swon members
+						Sworn members
 					</Text>
 				</Flex>
 
-				<SecondaryButton onClick={() => setIsVisible(true)}>
+				<SecondaryButton
+					onClick={() => {
+						setHouseToDisplay(url);
+						setIsVisible(true);
+					}}
+				>
 					View details
 				</SecondaryButton>
 			</Flex>

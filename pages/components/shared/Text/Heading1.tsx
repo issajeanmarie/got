@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { font_family } from "../../../../themes/fonts";
-import { StyledComponentsTypes } from "../../../libs/types";
+import { StyledComponentsTypes } from "../../../../libs/types";
 
-export const Heading1 = styled.h1`
+export default styled.h1`
 	font-size: 64px;
 	font-family: ${(props: StyledComponentsTypes) =>
 		props.family === "normal" ? font_family.lato : font_family.RussoOne};

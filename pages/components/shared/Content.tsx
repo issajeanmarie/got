@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Content = styled.section`
+export default styled.section`
 	width: 56%;
 	margin: auto;
 

@@ -8,6 +8,7 @@ export type StyledComponentsTypes = {
 	items?: string;
 	justify?: string;
 	width?: string;
+	height?: string;
 	gap?: number;
 	family?: string;
 	mt?: number;
@@ -25,8 +26,16 @@ export type StyledComponentsTypes = {
 export type DrawerTypes = {
 	isVisible: boolean;
 	setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+	url: string;
 };
 
 export type CardTypes = {
 	setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+	name: string | undefined;
+	region: string | undefined;
+	coatOfArms: string | undefined;
+	words: string | undefined;
+	swornMembers: number | undefined;
+	url: string;
+	setHouseToDisplay: React.Dispatch<React.SetStateAction<string>>;
 };

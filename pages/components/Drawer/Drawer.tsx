@@ -1,13 +1,20 @@
 import Image from "next/image";
-import React, { FC, useState } from "react";
+import Spin from "antd/lib/spin";
+import { LoadingOutlined } from "@ant-design/icons";
+import React, { FC } from "react";
 import styled from "styled-components";
 import { colors } from "../../../themes/colors";
-import { DrawerTypes, StyledComponentsTypes } from "../../libs/types";
-import { Flex } from "../shared/Flex";
-import { Section } from "../shared/Section";
-import { SubTitle } from "../shared/Text/SubTitle";
-import { Text } from "../shared/Text/Text";
-import { Caption } from "../shared/Text/Caption";
+import { DrawerTypes, StyledComponentsTypes } from "../../../libs/types";
+import Flex from "../shared/Flex";
+import Section from "../shared/Section";
+import SubTitle from "../shared/Text/SubTitle";
+import Text from "../shared/Text/Text";
+import Caption from "../shared/Text/Caption";
+import { useGetSingleHouse } from "../../../hooks/useGetSingleHouse";
+import { useGetCurrentLord } from "../../../hooks/useGetCurrentLord";
+import { useGetOverLord } from "../../../hooks/useGetOverLord";
+
+const SpinIcon = <LoadingOutlined spin style={{ color: "black" }} />;
 
 const DrawerStyles = styled.div`
 	height: 100vh;
@@ -56,10 +63,33 @@ const CloseIcon = styled.img`
 	cursor: pointer;
 `;
 
-const Drawer: FC<DrawerTypes> = ({ isVisible, setIsVisible }) => {
+const Drawer: FC<DrawerTypes> = ({ isVisible, setIsVisible, url }) => {
 	const handleCloseDrawer = () => {
 		setIsVisible(false);
 	};
+
+	const { house } = useGetSingleHouse(url);
+	const { lord } = useGetCurrentLord(house?.content?.currentLord);
+	const { overLord } = useGetOverLord(house?.content?.overlord);
+
+	const houseDetails = [
+		{ id: 0, name: "Words", value: house?.content?.words },
+		{ id: 1, name: "Coat of Arms", value: house?.content?.coatOfArms },
+		{ id: 2, name: "Seats", value: house?.content?.seats },
+	];
+
+	const currentLordDetails = [
+		{ id: 0, name: "Name", value: lord?.content?.name },
+		{ id: 1, name: "Gender", value: lord?.content?.gender },
+		{ id: 2, name: "Culture", value: lord?.content?.culture },
+	];
+
+	const overLordDetails = [
+		{ id: 0, name: "Name", value: overLord?.content?.name },
+		{ id: 1, name: "Region", value: overLord?.content?.region },
+		{ id: 2, name: "Founded", value: overLord?.content?.founded },
+	];
+
 	return (
 		<>
 			<DrawerStyles
@@ -68,63 +98,94 @@ const Drawer: FC<DrawerTypes> = ({ isVisible, setIsVisible }) => {
 			></DrawerStyles>
 
 			<DrawerContent isVisible={isVisible}>
-				<CloseIcon
-					src="/icons/Close.png"
-					alt="Close icon"
-					onClick={handleCloseDrawer}
-				/>
-
-				<Flex justify="none" gap={24} mb={12} mt={32}>
-					<Image
-						src="/icons/house.png"
-						width={46}
-						height={49}
-						alt="House icon"
-					/>
-
-					<SubTitle
-						mb={0}
-						transform="uppercase"
-						color={`${colors.black}`}
-						weight={600}
-					>
-						This is house of Tamarinds This is house of Tamarinds
-					</SubTitle>
-				</Flex>
-
-				<Section ml={52} mb={32}>
-					<Text color={`${colors.middle_grey}`}>Kigali - Rwanda</Text>
-				</Section>
-
-				<Section ml={52}>
-					<Text color={`${colors.black}`} mb={12}>
-						Details
-					</Text>
-
-					<Flex justify="none" gap={24} mb={8}>
-						<Caption width="30%" color={`${colors.middle_grey}`}>
-							Region
-						</Caption>
-
-						<Caption color={`${colors.black}`}>The Vale</Caption>
+				{house.isLoading || lord.isLoading || overLord.isLoading ? (
+					<Flex width="100%" justify="none" gap={12}>
+						<Spin indicator={SpinIcon} />
+						<Text color="black">Wait a few moment...</Text>
 					</Flex>
+				) : (
+					<>
+						<CloseIcon
+							src="/icons/Close.png"
+							alt="Close icon"
+							onClick={handleCloseDrawer}
+						/>
+						<Flex justify="none" gap={24} mb={12} mt={32}>
+							<Image
+								src="/icons/house.png"
+								width={46}
+								height={49}
+								alt="House icon"
+							/>
 
-					<Flex justify="none" gap={24} mb={8}>
-						<Caption width="30%" color={`${colors.middle_grey}`}>
-							Region
-						</Caption>
+							<SubTitle
+								mb={0}
+								transform="uppercase"
+								color={`${colors.black}`}
+								weight={600}
+							>
+								{house?.content?.name || "Unknown"}
+							</SubTitle>
+						</Flex>
+						<Section ml={70} mb={32}>
+							<Text color={`${colors.middle_grey}`}>
+								{house?.content?.region || "Unknown"}
+							</Text>
+						</Section>
+						<Section ml={70}>
+							<Text color={`${colors.black}`} mb={12}>
+								Details
+							</Text>
 
-						<Caption color={`${colors.black}`}>The Vale</Caption>
-					</Flex>
+							{houseDetails?.map((detail) => (
+								<Flex justify="none" gap={24} mb={8} key={detail.id}>
+									<Caption width="30%" color={`${colors.middle_grey}`}>
+										{detail.name}
+									</Caption>
 
-					<Flex justify="none" gap={24} mb={8}>
-						<Caption width="30%" color={`${colors.middle_grey}`}>
-							Region
-						</Caption>
+									<Caption width="100%" color={`${colors.black}`}>
+										{detail.value || "Unknown"}
+									</Caption>
+								</Flex>
+							))}
+						</Section>
+						<Section ml={70} mt={32}>
+							<Text color={`${colors.black}`} mb={12}>
+								Current lord
+							</Text>
 
-						<Caption color={`${colors.black}`}>The Vale</Caption>
-					</Flex>
-				</Section>
+							{currentLordDetails?.map((detail) => (
+								<Flex key={detail.id} justify="none" gap={24} mb={8}>
+									<Caption width="30%" color={`${colors.middle_grey}`}>
+										{detail.name}
+									</Caption>
+
+									<Caption width="100%" color={`${colors.black}`}>
+										{detail.value || "Unknown"}
+									</Caption>
+								</Flex>
+							))}
+						</Section>
+						<Section ml={70} mt={32}>
+							<Text color={`${colors.black}`} mb={12}>
+								Over lord
+							</Text>
+
+							{overLordDetails?.map((detail) => (
+								<Flex key={detail.id} justify="none" gap={24} mb={8}>
+									<Caption width="30%" color={`${colors.middle_grey}`}>
+										{detail.name}
+									</Caption>
+
+									<Caption width="100%" color={`${colors.black}`}>
+										{detail.value || "Unknown"}
+									</Caption>
+								</Flex>
+							))}
+						</Section>
+						kz
+					</>
+				)}
 			</DrawerContent>
 		</>
 	);
