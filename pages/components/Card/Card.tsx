@@ -28,7 +28,7 @@ const Card: FC<CardTypes> = ({ setIsVisible }) => {
 				<Image src="/icons/house.png" width={26} height={29} alt="House icon" />
 
 				<SubTitle transform="uppercase" weight={600}>
-					This is house of Tamarinds
+					This is house of Tamarindsc
 				</SubTitle>
 			</Flex>
 
