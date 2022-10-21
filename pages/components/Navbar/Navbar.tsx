@@ -4,6 +4,7 @@ import Flex from "../shared/Flex";
 import PrimaryButton from "../shared/Buttons/PrimaryButton";
 import Caption from "../shared/Text/Caption";
 import styled from "styled-components";
+import message from "antd/lib/message";
 import { NavbarTypes, StyledComponentsTypes } from "../../../libs/types";
 
 const MenuRightSide = styled(Flex)`
@@ -49,7 +50,9 @@ const Navbar: FC<NavbarTypes> = ({ setSearchValue, searchValue }) => {
 	const handleCopy = () => {
 		navigator.clipboard
 			.writeText("https://fmovies.to/series/game-of-thrones-92p7q")
-			.then(() => alert("Movie link added to clipboard"));
+			.then(() => {
+				message.success("Movie link added to clipboard");
+			});
 	};
 	return (
 		<Flex>

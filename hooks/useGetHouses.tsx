@@ -18,9 +18,9 @@ export const useGetHouses = ({ pageSize = 10, search = "" }) => {
 		setHouses({ ...houses, isLoading: true });
 		try {
 			const response = await axios.get(
-				`https://anapioficeandfire.com/api/houses?page=0&pageSize=${pageSize}&name=${
-					search || ""
-				}`
+				`https://anapioficeandfire.com/api/houses?page=0&pageSize=${
+					pageSize || ""
+				}&name=${search || ""}`
 			);
 			setHouses({
 				...houses,
