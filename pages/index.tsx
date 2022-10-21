@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import type { NextPage } from "next";
-import { LoadingOutlined } from "@ant-design/icons";
-import Spin from "antd/lib/spin";
 import Navbar from "./components/Navbar";
 import Layout from "./components/shared/Layout";
 import Content from "./components/shared/Content";
@@ -13,9 +11,7 @@ import Card from "./components/Card";
 import Flex from "./components/shared/Flex";
 import Drawer from "./components/Drawer/Drawer";
 import { useGetHouses } from "../hooks/useGetHouses";
-import Text from "./components/shared/Text/Text";
-
-const SpinIcon = <LoadingOutlined spin style={{ color: "white" }} />;
+import Loader from "./components/Loader/Loader";
 
 type HouseTypes = {
 	name: string;
@@ -28,12 +24,15 @@ type HouseTypes = {
 
 const Home: NextPage = () => {
 	const [isVisible, setIsVisible] = useState<boolean>(false);
-	const { houses } = useGetHouses();
+	const [pageSize, setPageSize] = useState<number>(50);
+	const [searchValue, setSearchValue] = useState<string>("");
+
+	const { houses } = useGetHouses({ pageSize, search: searchValue });
 	const [houseToDisplay, setHouseToDisplay] = useState<string>("");
 
 	return (
 		<Layout>
-			<Navbar />
+			<Navbar setSearchValue={setSearchValue} searchValue={searchValue} />
 			<Drawer
 				isVisible={isVisible}
 				setIsVisible={setIsVisible}
@@ -42,10 +41,7 @@ const Home: NextPage = () => {
 
 			<Content>
 				{houses.isLoading ? (
-					<Flex width="100%" height="100vh" gap={12} justify="center">
-						<Spin indicator={SpinIcon} />
-						<Text color="white">Wait a few moment...</Text>
-					</Flex>
+					<Loader />
 				) : (
 					<>
 						<Heading1 mt={64}>
@@ -88,6 +84,15 @@ const Home: NextPage = () => {
 									}
 								)}
 							</Flex>
+
+							{houses.content.length > 49 && (
+								<button
+									className="load_more_btn"
+									onClick={() => setPageSize(pageSize * 2)}
+								>
+									Load more
+								</button>
+							)}
 						</Section>
 					</>
 				)}

@@ -4,7 +4,7 @@ This project shows all of Game of Thrones Houses, with the capability to search 
 
 ### The project preview and setup:
 
-- If you want to visit the website, go to: [got.vercel.com](https://got.vercel.com/)
+- If you want to visit the website, go to: [got-houses.netlify.app](https://got-houses.netlify.app/)
 - If you want to run the project on your computer, do the following:
   - Clone this repository,
   - Navigate into the cloned project and run the following commands:

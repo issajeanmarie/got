@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Spin from "antd/lib/spin";
-import { LoadingOutlined } from "@ant-design/icons";
 import React, { FC } from "react";
 import styled from "styled-components";
 import { colors } from "../../../themes/colors";
@@ -13,8 +11,7 @@ import Caption from "../shared/Text/Caption";
 import { useGetSingleHouse } from "../../../hooks/useGetSingleHouse";
 import { useGetCurrentLord } from "../../../hooks/useGetCurrentLord";
 import { useGetOverLord } from "../../../hooks/useGetOverLord";
-
-const SpinIcon = <LoadingOutlined spin style={{ color: "black" }} />;
+import Loader from "../Loader";
 
 const DrawerStyles = styled.div`
 	height: 100vh;
@@ -99,10 +96,7 @@ const Drawer: FC<DrawerTypes> = ({ isVisible, setIsVisible, url }) => {
 
 			<DrawerContent isVisible={isVisible}>
 				{house.isLoading || lord.isLoading || overLord.isLoading ? (
-					<Flex width="100%" justify="none" gap={12}>
-						<Spin indicator={SpinIcon} />
-						<Text color="black">Wait a few moment...</Text>
-					</Flex>
+					<Loader color="black" />
 				) : (
 					<>
 						<CloseIcon
@@ -183,7 +177,6 @@ const Drawer: FC<DrawerTypes> = ({ isVisible, setIsVisible, url }) => {
 								</Flex>
 							))}
 						</Section>
-						kz
 					</>
 				)}
 			</DrawerContent>

@@ -14,6 +14,7 @@ export type StyledComponentsTypes = {
 	mt?: number;
 	mb?: number;
 	ml?: number;
+	sm_ml?: number;
 	transform?: string;
 	weight?: number;
 	color?: string;
@@ -21,6 +22,7 @@ export type StyledComponentsTypes = {
 	wrap?: string;
 	sm?: string;
 	isVisible?: boolean;
+	isSearchVisible?: string;
 };
 
 export type DrawerTypes = {
@@ -38,4 +40,13 @@ export type CardTypes = {
 	swornMembers: number | undefined;
 	url: string;
 	setHouseToDisplay: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export type LoaderTypes = {
+	color?: string;
+};
+
+export type NavbarTypes = {
+	setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+	searchValue: string;
 };
