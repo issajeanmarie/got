@@ -24,7 +24,7 @@ type HouseTypes = {
 
 const Home: NextPage = () => {
 	const [isVisible, setIsVisible] = useState<boolean>(false);
-	const [pageSize, setPageSize] = useState<number>(50);
+	const [pageSize, setPageSize] = useState<number>(10);
 	const [searchValue, setSearchValue] = useState<string>("");
 
 	const { houses } = useGetHouses({ pageSize, search: searchValue });
@@ -85,7 +85,7 @@ const Home: NextPage = () => {
 								)}
 							</Flex>
 
-							{houses.content.length > 49 && (
+							{houses.content.length > 9 && (
 								<button
 									className="load_more_btn"
 									onClick={() => setPageSize(pageSize * 2)}
