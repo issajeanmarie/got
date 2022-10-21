@@ -15,6 +15,7 @@ export default styled.button`
 	font-family: ${font_family.lato};
 	cursor: pointer;
 	white-space: nowrap;
+	text-decoration: none;
 
 	@media (max-width: 768px) {
 		padding: 9px;
