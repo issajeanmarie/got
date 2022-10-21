@@ -34,6 +34,7 @@ const SearchInput = styled.input`
 	outline: none;
 	border-radius: 4px;
 	background: white;
+	color: black;
 	padding: 12px;
 	font-weight: 600;
 	transition: 1s;
