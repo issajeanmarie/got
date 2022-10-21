@@ -7,7 +7,7 @@ type StateTypes = {
 	isLoading: boolean;
 };
 
-export const useGetHouses = ({ pageSize = 50, search = "" }) => {
+export const useGetHouses = ({ pageSize = 10, search = "" }) => {
 	const [houses, setHouses] = useState<StateTypes>({
 		content: [],
 		isLoading: false,
