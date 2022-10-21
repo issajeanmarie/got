@@ -5,7 +5,7 @@ export default styled.p`
 	font-size: 22px;
 	margin-top: ${(props: StyledComponentsTypes) =>
 		props.mt ? `${props.mt}px` : ""};
-	margin-bottom: ${(props) => (props.mb ? `${props.mb}px` : "")};
+	margin-bottom: ${(props) => (props.mb ? `${props.mb}px !important` : "")};
 	text-transform: ${(props) => props.transform || ""};
 	font-weight: ${(props) => props.weight || ""};
 	color: ${(props) => props.color || ""};

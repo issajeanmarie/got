@@ -3,7 +3,7 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: Lato, Arial, Helvetica, sans-serif;
-	overflow-x: hidden;
+	overflow: hidden;
 }
 
 * {
@@ -21,7 +21,7 @@ body {
 }
 
 p {
-	margin: 0;
+	margin: 0 !important;
 }
 
 @media (max-width: 768px) {
