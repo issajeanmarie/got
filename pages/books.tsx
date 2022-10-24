@@ -13,13 +13,13 @@ import Drawer from "./components/Drawer/Drawer";
 import { useGetContent } from "../hooks/useGetContent";
 import Loader from "./components/Loader/Loader";
 
-type HouseTypes = {
+type BookTypes = {
 	name: string;
-	region: string;
-	words: string;
-	coatOfArms: string;
-	swornMembers: [];
+	characters: [];
 	url: string;
+	country: string;
+	numberOfPages: number;
+	publisher: string;
 };
 
 const Home: NextPage = () => {
@@ -27,7 +27,11 @@ const Home: NextPage = () => {
 	const [pageSize, setPageSize] = useState<number>(10);
 	const [searchValue, setSearchValue] = useState<string>("");
 
-	const { content } = useGetContent({ pageSize, search: searchValue });
+	const { content } = useGetContent({
+		pageSize,
+		search: searchValue,
+		endpoint: "/books",
+	});
 	const [contentToDisplay, setContentToDisplay] = useState<string>("");
 
 	return (
@@ -37,7 +41,7 @@ const Home: NextPage = () => {
 				isVisible={isVisible}
 				setIsVisible={setIsVisible}
 				url={contentToDisplay}
-				icon="/icons/house.png"
+				icon="/icons/book.png"
 			/>
 
 			<Content>
@@ -45,51 +49,48 @@ const Home: NextPage = () => {
 					<Loader />
 				) : (
 					<>
-						<Heading1 mt={64}>
-							Game of Thrones content on your finger-tips
-						</Heading1>
+						<Heading1 mt={64}>Game of Thrones books</Heading1>
 
 						<Title mt={16} width="66%">
-							You have Game of Thrones content on your finger tips, type to
-							search, or scroll down...
+							Type to search, or scroll down...
 						</Title>
 
 						<Section mt={64}>
 							<SubTitle mb={32} weight={600}>
-								{content?.content?.length || 0} Houses
+								{content?.content?.length || 0} Books
 							</SubTitle>
 
 							<Flex wrap="true" gap={24} items="top">
 								{content?.content?.map(
 									({
 										name,
-										region,
-										words,
-										coatOfArms,
-										swornMembers,
+										characters,
 										url,
-									}: HouseTypes) => {
+										country,
+										numberOfPages,
+										publisher,
+									}: BookTypes) => {
 										return (
 											<Card
 												key={url}
 												name={name}
 												url={url}
 												content={[
-													{ key: 0, name: "Region", value: region },
-													{ key: 1, name: "Coat of Arms", value: coatOfArms },
+													{ key: 0, name: "Publisher", value: publisher },
+													{ key: 1, name: "Country", value: country },
 													{
 														key: 2,
-														name: "Words",
-														value: words,
+														name: "Number of pages",
+														value: numberOfPages,
 													},
 												]}
 												numberedElement={{
-													name: "Sworn members",
-													value: swornMembers?.length,
+													name: "Total characters",
+													value: characters?.length,
 												}}
 												setIsVisible={setIsVisible}
 												setContentToDisplay={setContentToDisplay}
-												icon="/icons/house.png"
+												icon="/icons/book.png"
 											/>
 										);
 									}

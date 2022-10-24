@@ -8,10 +8,11 @@ import Section from "../shared/Section";
 import SubTitle from "../shared/Text/SubTitle";
 import Text from "../shared/Text/Text";
 import Caption from "../shared/Text/Caption";
-import { useGetSingleHouse } from "../../../hooks/useGetSingleHouse";
-import { useGetCurrentLord } from "../../../hooks/useGetCurrentLord";
-import { useGetOverLord } from "../../../hooks/useGetOverLord";
+import { useGetSingleElement } from "../../../hooks/useGetSingleElement";
+import { useGetSubElement } from "../../../hooks/useGetSubElement";
 import Loader from "../Loader";
+import { useRouter } from "next/router";
+import ContentFormatter from "./ContentFormatter";
 
 const DrawerStyles = styled.div`
 	height: 100vh;
@@ -60,42 +61,45 @@ const CloseIcon = styled.img`
 	cursor: pointer;
 `;
 
-const Drawer: FC<DrawerTypes> = ({ isVisible, setIsVisible, url }) => {
+const Drawer: FC<DrawerTypes> = ({
+	isVisible,
+	setIsVisible,
+	url,
+	icon = "/icons/element.png",
+}) => {
 	const handleCloseDrawer = () => {
 		setIsVisible(false);
 	};
 
-	const { house } = useGetSingleHouse(url);
-	const { lord } = useGetCurrentLord(house?.content?.currentLord);
-	const { overLord } = useGetOverLord(house?.content?.overlord);
+	const { element } = useGetSingleElement(url);
+	const { subElement: lord } = useGetSubElement(element?.content?.currentLord);
+	const { subElement: overLord } = useGetSubElement(element?.content?.overlord);
 
-	const houseDetails = [
-		{ id: 0, name: "Words", value: house?.content?.words },
-		{ id: 1, name: "Coat of Arms", value: house?.content?.coatOfArms },
-		{ id: 2, name: "Seats", value: house?.content?.seats },
-	];
+	const router = useRouter();
 
-	const currentLordDetails = [
-		{ id: 0, name: "Name", value: lord?.content?.name },
-		{ id: 1, name: "Gender", value: lord?.content?.gender },
-		{ id: 2, name: "Culture", value: lord?.content?.culture },
-	];
+	const isUserAt = {
+		books: router.pathname === "/books",
+		characters: router.pathname === "/characters",
+	};
 
-	const overLordDetails = [
-		{ id: 0, name: "Name", value: overLord?.content?.name },
-		{ id: 1, name: "Region", value: overLord?.content?.region },
-		{ id: 2, name: "Founded", value: overLord?.content?.founded },
-	];
+	const { bookContent, characterContent, houseContent } = ContentFormatter({
+		element,
+		lord,
+		overLord,
+	});
+
+	const contentToDisplay = isUserAt.books
+		? bookContent
+		: isUserAt.characters
+		? characterContent
+		: houseContent;
 
 	return (
 		<>
-			<DrawerStyles
-				isVisible={isVisible}
-				onClick={handleCloseDrawer}
-			></DrawerStyles>
+			<DrawerStyles isVisible={isVisible} onClick={handleCloseDrawer} />
 
 			<DrawerContent isVisible={isVisible}>
-				{house.isLoading || lord.isLoading || overLord.isLoading ? (
+				{element.isLoading || lord.isLoading || overLord.isLoading ? (
 					<Loader color="black" />
 				) : (
 					<>
@@ -104,13 +108,9 @@ const Drawer: FC<DrawerTypes> = ({ isVisible, setIsVisible, url }) => {
 							alt="Close icon"
 							onClick={handleCloseDrawer}
 						/>
-						<Flex justify="none" gap={24} mb={12} mt={32}>
-							<Image
-								src="/icons/house.png"
-								width={46}
-								height={49}
-								alt="House icon"
-							/>
+
+						<Flex justify="none" gap={24} mb={0} mt={32} items="top">
+							<Image src={icon} width={46} height={49} alt="element icon" />
 
 							<SubTitle
 								mb={0}
@@ -118,65 +118,41 @@ const Drawer: FC<DrawerTypes> = ({ isVisible, setIsVisible, url }) => {
 								color={`${colors.black}`}
 								weight={600}
 							>
-								{house?.content?.name || "Unknown"}
+								{element?.content?.name || "Unknown"}
 							</SubTitle>
 						</Flex>
+
 						<Section ml={70} mb={32}>
 							<Text color={`${colors.middle_grey}`}>
-								{house?.content?.region || "Unknown"}
+								{element?.content?.region || "Unknown"}
 							</Text>
 						</Section>
-						<Section ml={70}>
-							<Text color={`${colors.black}`} mb={12}>
-								Details
-							</Text>
 
-							{houseDetails?.map((detail) => (
-								<Flex justify="none" gap={24} mb={8} key={detail.id}>
-									<Caption width="30%" color={`${colors.middle_grey}`}>
-										{detail.name}
-									</Caption>
+						{contentToDisplay.map((ctx) => (
+							<Section key={ctx.id} ml={70} mt={32}>
+								<Text color={`${colors.black}`} mb={24}>
+									{ctx.name}
+								</Text>
 
-									<Caption width="100%" color={`${colors.black}`}>
-										{detail.value || "Unknown"}
-									</Caption>
-								</Flex>
-							))}
-						</Section>
-						<Section ml={70} mt={32}>
-							<Text color={`${colors.black}`} mb={12}>
-								Current lord
-							</Text>
+								{ctx?.subContent?.map((detail: any) => (
+									<Flex
+										justify="none"
+										gap={24}
+										mb={8}
+										key={detail.id}
+										items="top"
+									>
+										<Caption width="30%" color={`${colors.middle_grey}`}>
+											{detail.name}
+										</Caption>
 
-							{currentLordDetails?.map((detail) => (
-								<Flex key={detail.id} justify="none" gap={24} mb={8}>
-									<Caption width="30%" color={`${colors.middle_grey}`}>
-										{detail.name}
-									</Caption>
-
-									<Caption width="100%" color={`${colors.black}`}>
-										{detail.value || "Unknown"}
-									</Caption>
-								</Flex>
-							))}
-						</Section>
-						<Section ml={70} mt={32}>
-							<Text color={`${colors.black}`} mb={12}>
-								Over lord
-							</Text>
-
-							{overLordDetails?.map((detail) => (
-								<Flex key={detail.id} justify="none" gap={24} mb={8}>
-									<Caption width="30%" color={`${colors.middle_grey}`}>
-										{detail.name}
-									</Caption>
-
-									<Caption width="100%" color={`${colors.black}`}>
-										{detail.value || "Unknown"}
-									</Caption>
-								</Flex>
-							))}
-						</Section>
+										<Caption width="100%" color={`${colors.black}`}>
+											{detail.value || "Unknown"}
+										</Caption>
+									</Flex>
+								))}
+							</Section>
+						))}
 					</>
 				)}
 			</DrawerContent>

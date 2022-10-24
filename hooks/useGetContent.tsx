@@ -7,34 +7,38 @@ type StateTypes = {
 	isLoading: boolean;
 };
 
-export const useGetHouses = ({ pageSize = 10, search = "" }) => {
-	const [houses, setHouses] = useState<StateTypes>({
+export const useGetContent = ({
+	pageSize = 10,
+	search = "",
+	endpoint = "/houses",
+}) => {
+	const [content, setContent] = useState<StateTypes>({
 		content: [],
 		isLoading: false,
 		err: null,
 	});
 
-	const handleGetHouses = async () => {
-		setHouses({ ...houses, isLoading: true });
+	const handleGetContent = async () => {
+		setContent({ ...content, isLoading: true });
 		try {
 			const response = await axios.get(
-				`https://anapioficeandfire.com/api/houses?page=0&pageSize=${
+				`https://anapioficeandfire.com/api${endpoint}?page=0&pageSize=${
 					pageSize || ""
 				}&name=${search || ""}`
 			);
-			setHouses({
-				...houses,
+			setContent({
+				...content,
 				content: [...response.data],
 				isLoading: false,
 			});
 		} catch (error) {
-			setHouses({ ...houses, isLoading: false, err: error });
+			setContent({ ...content, isLoading: false, err: error });
 		}
 	};
 
 	useEffect(() => {
-		handleGetHouses();
+		handleGetContent();
 	}, [pageSize, search]);
 
-	return { houses, setHouses };
+	return { content, setContent };
 };

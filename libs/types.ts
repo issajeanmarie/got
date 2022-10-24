@@ -29,17 +29,17 @@ export type DrawerTypes = {
 	isVisible: boolean;
 	setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
 	url: string;
+	icon: string;
 };
 
 export type CardTypes = {
 	setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
 	name: string | undefined;
-	region: string | undefined;
-	coatOfArms: string | undefined;
-	words: string | undefined;
-	swornMembers: number | undefined;
 	url: string;
-	setHouseToDisplay: React.Dispatch<React.SetStateAction<string>>;
+	setContentToDisplay: React.Dispatch<React.SetStateAction<string>>;
+	content: any;
+	numberedElement: any;
+	icon: string;
 };
 
 export type LoaderTypes = {
