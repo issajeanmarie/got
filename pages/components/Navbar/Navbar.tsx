@@ -6,6 +6,8 @@ import Caption from "../shared/Text/Caption";
 import styled from "styled-components";
 import message from "antd/lib/message";
 import { NavbarTypes, StyledComponentsTypes } from "../../../libs/types";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const MenuRightSide = styled(Flex)`
 	position: relative;
@@ -55,11 +57,37 @@ const Navbar: FC<NavbarTypes> = ({ setSearchValue, searchValue }) => {
 				message.success("Movie link added to clipboard");
 			});
 	};
+
+	const router = useRouter();
+	const isActive = (url: string) => router.pathname === url;
+
+	const links = [
+		{ key: 0, name: "Houses", url: "/" },
+		{ key: 1, name: "Books", url: "/books" },
+		{ key: 2, name: "Characters", url: "/characters" },
+	];
+
 	return (
 		<Flex>
-			<Logo src="/icons/logo.svg" alt="Game of Thrones Logo" sm="hide" />
+			<Flex justify="none" gap={23}>
+				<Link href="/">
+					<a>
+						<Logo src="/icons/logo.svg" alt="Game of Thrones Logo" sm="hide" />
 
-			<Logo src="/icons/mobile_logo.png" alt="Game of Thrones Logo" />
+						<Logo src="/icons/mobile_logo.png" alt="Game of Thrones Logo" />
+					</a>
+				</Link>
+
+				{links.map((link) => (
+					<Link key={link.key} href={link.url}>
+						<a>
+							<Caption color="white" weight={isActive(link.url) ? 600 : 300}>
+								{link.name}
+							</Caption>
+						</a>
+					</Link>
+				))}
+			</Flex>
 
 			<MenuRightSide gap={36} width="fit-content">
 				<SearchInput

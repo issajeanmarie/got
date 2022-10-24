@@ -7,20 +7,20 @@ type StateTypes = {
 	isLoading: boolean;
 };
 
-export const useGetSingleHouse = (url: string) => {
-	const [house, setHouse] = useState<StateTypes>({
+export const useGetSingleElement = (url: string) => {
+	const [element, setElement] = useState<StateTypes>({
 		content: [],
 		isLoading: false,
 		err: null,
 	});
 
 	const handleGetSingleHouse = async () => {
-		setHouse({ ...house, isLoading: true });
+		setElement({ ...element, isLoading: true });
 		try {
 			const response = await axios.get(url);
-			setHouse({ ...house, content: response.data, isLoading: false });
+			setElement({ ...element, content: response.data, isLoading: false });
 		} catch (error) {
-			setHouse({ ...house, isLoading: false, err: error });
+			setElement({ ...element, isLoading: false, err: error });
 		}
 	};
 
@@ -28,5 +28,5 @@ export const useGetSingleHouse = (url: string) => {
 		url && handleGetSingleHouse();
 	}, [url]);
 
-	return { house };
+	return { element };
 };

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { colors } from "../../../themes/colors";
 import Flex from "../shared/Flex";
 import SubTitle from "../shared/Text/SubTitle";
-import Caption from "../shared/Text/Caption";
 import Text from "../shared/Text/Text";
 import Section from "../shared/Section";
 import NumberIndicator from "../shared/NumberIndicator";
@@ -16,25 +15,31 @@ const CardStyles = styled.div`
 	border: 1px solid ${colors.card_border};
 	padding: 24px;
 	border-radius: 4px;
-	margin-bottom: 24px;
 	flex: 1;
 	flex-basis: 30%;
 `;
 
 const Card: FC<CardTypes> = ({
+	content,
 	setIsVisible,
 	name,
-	coatOfArms,
-	region,
-	words,
-	swornMembers,
 	url,
-	setHouseToDisplay,
+	setContentToDisplay,
+	numberedElement,
+	icon,
 }) => {
 	return (
 		<CardStyles>
 			<Flex justify="none" gap={24} mb={32}>
-				<Image src="/icons/house.png" width={26} height={29} alt="House icon" />
+				{icon && (
+					<Image
+						src={icon}
+						width={29}
+						height={29}
+						alt="Element icon"
+						style={{ objectFit: "cover" }}
+					/>
+				)}
 
 				<SubTitle transform="uppercase" weight={600}>
 					{name || "Unknown"}
@@ -42,45 +47,31 @@ const Card: FC<CardTypes> = ({
 			</Flex>
 
 			<Section mb={32}>
-				<Flex justify="none" gap={24} mb={12}>
-					<Text weight={300} color="#C4C4C4" width="22%">
-						Region:
-					</Text>
+				{content.map((el: { key: number; name: string; value: string }) => (
+					<Flex key={el.key} justify="none" gap={24} mb={12}>
+						<Text weight={300} color="#C4C4C4" width="22%">
+							{el.name}
+						</Text>
 
-					<Text>{region || "Unknown"}</Text>
-				</Flex>
-
-				<Flex justify="none" gap={24} mb={12}>
-					<Text weight={300} color="#C4C4C4" width="22%">
-						Words:
-					</Text>
-
-					<Text>{words || "Unknown"}</Text>
-				</Flex>
-
-				<Flex justify="none" gap={24} mb={12}>
-					<Text weight={300} color="#C4C4C4" width="22%">
-						CoatOfArms:
-					</Text>
-
-					<Text>{coatOfArms || "Unknown"}</Text>
-				</Flex>
+						<Text>{el.value || "Unknown"}</Text>
+					</Flex>
+				))}
 			</Section>
 
 			<Flex>
 				<Flex justify="none" width="100%" gap={12}>
 					<NumberIndicator items="center" justify="center">
-						{swornMembers}
+						{numberedElement.value}
 					</NumberIndicator>
 
 					<Text weight={300} color="#C4C4C4" width="20%" nowrap="true">
-						Sworn members
+						{numberedElement.name}
 					</Text>
 				</Flex>
 
 				<SecondaryButton
 					onClick={() => {
-						setHouseToDisplay(url);
+						setContentToDisplay(url);
 						setIsVisible(true);
 					}}
 				>
