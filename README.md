@@ -16,7 +16,7 @@ This project shows all of Game of Thrones Houses, with the capability to search 
 
 ### Technologies used:
 
-- [Next.JS] (https://nextjs.org/)
+- [Next.JS](https://nextjs.org/)
 - [Cypress](https://docs.cypress.io/) - for testing components and application
 - [Styled components](https://styled-components.com/) - for in-JS styles
 - [Netlify](https://netlify.com/) - for deployment
