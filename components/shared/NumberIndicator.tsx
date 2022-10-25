@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Flex from "./Flex";
-import { colors } from "../../../themes/colors";
+import { colors } from "../../themes/colors";
 
 export default styled(Flex)`
 	width: 24px;

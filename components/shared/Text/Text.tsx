@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { colors } from "../../../../themes/colors";
-import { StyledComponentsTypes } from "../../../../libs/types";
+import { colors } from "../../../themes/colors";
+import { StyledComponentsTypes } from "../../../libs/types";
 
 export default styled.p`
 	font-size: 16px;

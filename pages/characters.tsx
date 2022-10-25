@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import type { NextPage } from "next";
-import Navbar from "./components/Navbar";
-import Layout from "./components/shared/Layout";
-import Content from "./components/shared/Content";
-import Heading1 from "./components/shared/Text/Heading1";
-import Title from "./components/shared/Text/Title";
-import SubTitle from "./components/shared/Text/SubTitle";
-import Section from "./components/shared/Section";
-import Card from "./components/Card";
-import Flex from "./components/shared/Flex";
-import Drawer from "./components/Drawer/Drawer";
+import Navbar from "../components/Navbar";
+import Layout from "../components/shared/Layout";
+import Content from "../components/shared/Content";
+import Heading1 from "../components/shared/Text/Heading1";
+import Title from "../components/shared/Text/Title";
+import SubTitle from "../components/shared/Text/SubTitle";
+import Section from "../components/shared/Section";
+import Card from "../components/Card";
+import Flex from "../components/shared/Flex";
+import Drawer from "../components/Drawer/Drawer";
 import { useGetContent } from "../hooks/useGetContent";
-import Loader from "./components/Loader/Loader";
+import Loader from "../components/Loader/Loader";
 
 type CharacterTypes = {
 	name: string;
@@ -21,7 +21,7 @@ type CharacterTypes = {
 	books: [];
 };
 
-const Home: NextPage = () => {
+const Characters: NextPage = () => {
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 	const [pageSize, setPageSize] = useState<number>(10);
 	const [searchValue, setSearchValue] = useState<string>("");
@@ -99,4 +99,4 @@ const Home: NextPage = () => {
 		</Layout>
 	);
 };
-export default Home;
+export default Characters;

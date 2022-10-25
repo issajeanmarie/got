@@ -1,15 +1,15 @@
 import Image from "next/image";
 import React, { FC } from "react";
 import styled from "styled-components";
-import { colors } from "../../../themes/colors";
-import { DrawerTypes, StyledComponentsTypes } from "../../../libs/types";
+import { colors } from "../../themes/colors";
+import { DrawerTypes, StyledComponentsTypes } from "../../libs/types";
 import Flex from "../shared/Flex";
 import Section from "../shared/Section";
 import SubTitle from "../shared/Text/SubTitle";
 import Text from "../shared/Text/Text";
 import Caption from "../shared/Text/Caption";
-import { useGetSingleElement } from "../../../hooks/useGetSingleElement";
-import { useGetSubElement } from "../../../hooks/useGetSubElement";
+import { useGetSingleElement } from "../../hooks/useGetSingleElement";
+import { useGetSubElement } from "../../hooks/useGetSubElement";
 import Loader from "../Loader";
 import { useRouter } from "next/router";
 import ContentFormatter from "./ContentFormatter";
@@ -62,9 +62,9 @@ const CloseIcon = styled.img`
 `;
 
 const Drawer: FC<DrawerTypes> = ({
-	isVisible,
-	setIsVisible,
-	url,
+	isVisible = false,
+	setIsVisible = () => null,
+	url = null,
 	icon = "/icons/element.png",
 }) => {
 	const handleCloseDrawer = () => {

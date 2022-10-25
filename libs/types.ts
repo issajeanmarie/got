@@ -28,7 +28,7 @@ export type StyledComponentsTypes = {
 export type DrawerTypes = {
 	isVisible: boolean;
 	setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-	url: string;
+	url: string | null;
 	icon: string;
 };
 

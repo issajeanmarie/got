@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StyledComponentsTypes } from "../../../libs/types";
+import { StyledComponentsTypes } from "../../libs/types";
 
 export default styled.div`
 	display: flex;

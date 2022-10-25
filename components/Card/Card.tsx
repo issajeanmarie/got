@@ -1,14 +1,14 @@
 import React, { FC } from "react";
 import Image from "next/image";
 import styled from "styled-components";
-import { colors } from "../../../themes/colors";
+import { colors } from "../../themes/colors";
 import Flex from "../shared/Flex";
 import SubTitle from "../shared/Text/SubTitle";
 import Text from "../shared/Text/Text";
 import Section from "../shared/Section";
 import NumberIndicator from "../shared/NumberIndicator";
 import SecondaryButton from "../shared/Buttons/SecondaryButton";
-import { CardTypes } from "../../../libs/types";
+import { CardTypes } from "../../libs/types";
 
 const CardStyles = styled.div`
 	background: ${colors.card};
