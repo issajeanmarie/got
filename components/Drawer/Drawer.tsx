@@ -78,8 +78,8 @@ const Drawer: FC<DrawerTypes> = ({
 	const router = useRouter();
 
 	const isUserAt = {
-		books: router.pathname === "/books",
-		characters: router.pathname === "/characters",
+		books: router?.pathname === "/books",
+		characters: router?.pathname === "/characters",
 	};
 
 	const { bookContent, characterContent, houseContent } = ContentFormatter({

@@ -19,5 +19,10 @@
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-	"exclude": ["node_modules", "node_modules/(?!(.*antd/es)/)"]
+	"exclude": [
+		"node_modules",
+		"node_modules/(?!(.*antd/es)/)",
+		"**/*.cy.*",
+		"cypress"
+	]
 }
