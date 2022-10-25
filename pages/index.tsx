@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import type { NextPage } from "next";
-import Navbar from "./components/Navbar";
-import Layout from "./components/shared/Layout";
-import Content from "./components/shared/Content";
-import Heading1 from "./components/shared/Text/Heading1";
-import Title from "./components/shared/Text/Title";
-import SubTitle from "./components/shared/Text/SubTitle";
-import Section from "./components/shared/Section";
-import Card from "./components/Card";
-import Flex from "./components/shared/Flex";
-import Drawer from "./components/Drawer/Drawer";
+import Navbar from "../components/Navbar";
+import Layout from "../components/shared/Layout";
+import Content from "../components/shared/Content";
+import Heading1 from "../components/shared/Text/Heading1";
+import Title from "../components/shared/Text/Title";
+import SubTitle from "../components/shared/Text/SubTitle";
+import Section from "../components/shared/Section";
+import Card from "../components/Card";
+import Flex from "../components/shared/Flex";
+import Drawer from "../components/Drawer/Drawer";
 import { useGetContent } from "../hooks/useGetContent";
-import Loader from "./components/Loader/Loader";
+import Loader from "../components/Loader/Loader";
 
 type HouseTypes = {
 	name: string;
@@ -46,11 +46,11 @@ const Home: NextPage = () => {
 				) : (
 					<>
 						<Heading1 mt={64}>
-							Game of Thrones content on your finger-tips
+							Game of Thrones houses on your finger-tips
 						</Heading1>
 
 						<Title mt={16} width="66%">
-							You have Game of Thrones content on your finger tips, type to
+							You have Game of Thrones houses on your finger tips, type to
 							search, or scroll down...
 						</Title>
 

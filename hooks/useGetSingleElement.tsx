@@ -7,7 +7,7 @@ type StateTypes = {
 	isLoading: boolean;
 };
 
-export const useGetSingleElement = (url: string) => {
+export const useGetSingleElement = (url: string | null) => {
 	const [element, setElement] = useState<StateTypes>({
 		content: [],
 		isLoading: false,
@@ -17,7 +17,7 @@ export const useGetSingleElement = (url: string) => {
 	const handleGetSingleHouse = async () => {
 		setElement({ ...element, isLoading: true });
 		try {
-			const response = await axios.get(url);
+			const response = await axios.get(url || "");
 			setElement({ ...element, content: response.data, isLoading: false });
 		} catch (error) {
 			setElement({ ...element, isLoading: false, err: error });

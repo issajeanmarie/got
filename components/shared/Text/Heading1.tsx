@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { font_family } from "../../../../themes/fonts";
-import { StyledComponentsTypes } from "../../../../libs/types";
-import { colors } from "../../../../themes/colors";
+import { font_family } from "../../../themes/fonts";
+import { StyledComponentsTypes } from "../../../libs/types";
+import { colors } from "../../../themes/colors";
 
 export default styled.h1`
 	font-size: 64px;

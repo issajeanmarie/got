@@ -3,7 +3,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import Spin from "antd/lib/spin";
 import Flex from "../shared/Flex";
 import Text from "../shared/Text/Text";
-import { LoaderTypes } from "../../../libs/types";
+import { LoaderTypes } from "../../libs/types";
 
 const Loader: FC<LoaderTypes> = ({ color }) => {
 	const SpinIcon = <LoadingOutlined spin style={{ color: color || "white" }} />;

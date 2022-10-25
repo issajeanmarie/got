@@ -5,7 +5,7 @@ import PrimaryButton from "../shared/Buttons/PrimaryButton";
 import Caption from "../shared/Text/Caption";
 import styled from "styled-components";
 import message from "antd/lib/message";
-import { NavbarTypes, StyledComponentsTypes } from "../../../libs/types";
+import { NavbarTypes, StyledComponentsTypes } from "../../libs/types";
 import Link from "next/link";
 import { useRouter } from "next/router";
 

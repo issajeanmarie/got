@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { colors } from "../../../../themes/colors";
-import { font_family } from "../../../../themes/fonts";
+import { colors } from "../../../themes/colors";
+import { font_family } from "../../../themes/fonts";
 
 export default styled.button`
 	background-color: ${colors.primary};
