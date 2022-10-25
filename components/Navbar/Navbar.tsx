@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import Image from "next/image";
 import Flex from "../shared/Flex";
 import PrimaryButton from "../shared/Buttons/PrimaryButton";
 import Caption from "../shared/Text/Caption";
@@ -51,14 +50,6 @@ const SearchInput = styled.input`
 `;
 
 const Navbar: FC<NavbarTypes> = ({ setSearchValue, searchValue }) => {
-	const handleCopy = () => {
-		navigator.clipboard
-			.writeText("https://fmovies.to/series/game-of-thrones-92p7q")
-			.then(() => {
-				message.success("Movie link added to clipboard");
-			});
-	};
-
 	const router = useRouter();
 	const isActive = (url: string) => router?.pathname === url;
 
@@ -98,15 +89,6 @@ const Navbar: FC<NavbarTypes> = ({ setSearchValue, searchValue }) => {
 					value={searchValue}
 				/>
 
-				<Image
-					onClick={handleCopy}
-					src="/icons/share.png"
-					width={32}
-					height={32}
-					alt="Share icon"
-					className="pointer"
-				/>
-
 				<a
 					href="https://fmovies.to/series/game-of-thrones-92p7q"
 					className="link"
@@ -114,13 +96,6 @@ const Navbar: FC<NavbarTypes> = ({ setSearchValue, searchValue }) => {
 					rel="noreferrer"
 				>
 					<PrimaryButton>
-						<Image
-							src="/icons/play.png"
-							width={12}
-							height={12}
-							alt="Play icon"
-						/>
-
 						<Caption>Watch now</Caption>
 					</PrimaryButton>
 				</a>
