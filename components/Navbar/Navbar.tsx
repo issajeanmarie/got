@@ -8,6 +8,7 @@ import message from "antd/lib/message";
 import { NavbarTypes, StyledComponentsTypes } from "../../libs/types";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import CustomLink from "../shared/Text/CustomLink";
 
 const MenuRightSide = styled(Flex)`
 	position: relative;
@@ -59,7 +60,7 @@ const Navbar: FC<NavbarTypes> = ({ setSearchValue, searchValue }) => {
 	};
 
 	const router = useRouter();
-	const isActive = (url: string) => router.pathname === url;
+	const isActive = (url: string) => router?.pathname === url;
 
 	const links = [
 		{ key: 0, name: "Houses", url: "/" },
@@ -80,11 +81,9 @@ const Navbar: FC<NavbarTypes> = ({ setSearchValue, searchValue }) => {
 
 				{links.map((link) => (
 					<Link key={link.key} href={link.url}>
-						<a>
-							<Caption color="white" weight={isActive(link.url) ? 600 : 300}>
-								{link.name}
-							</Caption>
-						</a>
+						<CustomLink color="white" weight={isActive(link.url) ? 600 : 300}>
+							{link.name}
+						</CustomLink>
 					</Link>
 				))}
 			</Flex>
