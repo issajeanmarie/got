@@ -11,6 +11,8 @@ describe("Visit home page", () => {
 		// Visiting books page and verifying content
 
 		cy.contains("Books").click();
+
+		cy.visit("localhost:3000/books");
 		cy.url().should("include", "/books");
 		cy.contains("Game of Thrones books");
 
@@ -20,6 +22,8 @@ describe("Visit home page", () => {
 
 		//Visiting characters page
 		cy.contains("Characters").click();
+
+		cy.visit("localhost:3000/characters");
 		cy.url().should("include", "/characters");
 		cy.contains("Game of Thrones characters");
 
